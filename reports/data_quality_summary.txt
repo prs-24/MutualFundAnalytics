@@ -1,0 +1,35 @@
+DATA QUALITY SUMMARY – DAY 1
+
+Datasets Analyzed: 10
+
+Files Successfully Loaded:
+
+1. fund_master
+2. nav_history
+3. aum_by_fund_house
+4. monthly_sip_inflows
+5. category_inflows
+6. industry_folio_count
+7. scheme_performance
+8. investor_transactions
+9. portfolio_holdings
+10. benchmark_indices
+
+Summary:
+
+* All datasets loaded successfully.
+* No duplicate records detected.
+* Data types are consistent and suitable for analysis.
+* No missing values detected except in monthly_sip_inflows.csv.
+
+Anomaly Identified:
+
+monthly_sip_inflows.csv
+Column: yoy_growth_pct
+Missing Values: 12
+
+Possible Reason:
+YoY growth cannot be calculated for the initial months due to lack of prior-year comparison data.
+
+Overall Assessment:
+Dataset quality is good and suitable for further analysis and dashboard development.
