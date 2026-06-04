@@ -2,9 +2,9 @@
 
 ## Overview
 
-Mutual Fund Analytics is a data engineering and analytics project designed to analyze mutual fund performance, investor behavior, AUM trends, SIP inflows, portfolio holdings, and benchmark indices.
+Mutual Fund Analytics is an end-to-end data engineering and analytics project focused on analyzing mutual fund performance, investor behavior, AUM trends, SIP inflows, portfolio holdings, and benchmark indices.
 
-The project focuses on building a complete analytics pipeline, starting from raw data ingestion and validation to data cleaning, database design, and analytical SQL reporting.
+The project covers the complete analytics lifecycle including data ingestion, validation, cleaning, database design, exploratory data analysis, business insight generation, and dashboard-ready data preparation.
 
 ---
 
@@ -15,7 +15,9 @@ The project focuses on building a complete analytics pipeline, starting from raw
 * Standardize and validate financial data
 * Design a structured SQLite analytics database
 * Generate business insights using SQL queries
-* Create reusable data pipelines for future dashboarding and reporting
+* Perform Exploratory Data Analysis (EDA)
+* Build reusable data pipelines for reporting and dashboarding
+* Prepare analytics-ready datasets for visualization
 
 ---
 
@@ -40,9 +42,7 @@ The project focuses on building a complete analytics pipeline, starting from raw
 
 # Day 2: Data Cleaning & SQLite Database Design
 
-## Objectives
-
-### Data Cleaning
+## Data Cleaning
 
 Performed cleaning and validation on:
 
@@ -76,8 +76,6 @@ Performed cleaning and validation on:
 
 ## Database Design
 
-Designed and implemented a SQLite analytics database.
-
 ### Dimension Table
 
 * `dim_fund`
@@ -103,7 +101,7 @@ Designed and implemented a SQLite analytics database.
 
 ## Analytical SQL Queries
 
-Implemented 10 analytical SQL queries including:
+Implemented analytical queries including:
 
 * Top Fund Houses by AUM
 * Average Returns by Category
@@ -115,6 +113,55 @@ Implemented 10 analytical SQL queries including:
 * KYC Status Distribution
 * Fund House Scheme Count
 * Top Funds by Sharpe Ratio
+
+---
+
+# Day 3: Exploratory Data Analysis (EDA)
+
+## Objectives
+
+* Dataset profiling and exploration
+* NAV trend analysis
+* AUM growth analysis
+* SIP inflow analysis
+* Category inflow visualization
+* Investor demographic analysis
+* Geographic distribution analysis
+* Folio growth analysis
+* Portfolio sector allocation analysis
+* Benchmark index analysis
+* Fund correlation analysis
+
+---
+
+## Visualizations Created
+
+* NAV Trend Analysis
+* AUM Growth Analysis
+* SIP Inflow Trend
+* Category Inflow Heatmap
+* Age Group Distribution
+* Gender Distribution
+* Investment Amount Analysis
+* State-wise Investment Distribution
+* City Tier Distribution
+* Folio Growth Trend
+* Sector Allocation Donut Chart
+* Benchmark Performance Analysis
+* NAV Correlation Matrix
+
+---
+
+## Key Insights
+
+* Mutual fund NAVs exhibited strong long-term growth trends.
+* SIP inflows increased consistently throughout the analysis period.
+* Folio growth indicates rising retail investor participation.
+* AUM remains concentrated among leading fund houses.
+* Investor participation varies significantly across age groups and geographies.
+* Equity-oriented investment categories attracted stronger inflows.
+* Sector allocation highlights concentration in key growth sectors.
+* Benchmark indices demonstrated long-term market expansion despite periodic corrections.
 
 ---
 
@@ -150,6 +197,12 @@ MutualFundAnalytics/
 ├── docs/
 │   └── data_dictionary.md
 │
+├── notebooks/
+│   └── EDA_Analysis.ipynb
+│
+├── reports/
+│   └── charts/
+│
 ├── scripts/
 │   ├── data_ingestion.py
 │   ├── amfi_validation.py
@@ -158,8 +211,6 @@ MutualFundAnalytics/
 │   ├── create_db.py
 │   ├── load_data.py
 │   └── verify_db.py
-│
-├── reports/
 │
 ├── README.md
 └── requirements.txt
@@ -172,36 +223,54 @@ MutualFundAnalytics/
 * Python
 * Pandas
 * NumPy
+* Matplotlib
+* Seaborn
+* Plotly
 * SQLAlchemy
 * SQLite
 * Requests
+* Jupyter Notebook
 * Git & GitHub
 
 ---
 
 ## Current Status
 
-✅ Day 1 Completed
+✅ Day 1 Completed – Data Ingestion & Validation
 
-✅ Day 2 Completed
+✅ Day 2 Completed – Data Cleaning & Database Design
 
-### Achievements
+✅ Day 3 Completed – Exploratory Data Analysis
+
+🔄 Day 4 – Performance Analytics & Risk Metrics
+
+⏳ Day 5 – Dashboard Development
+
+⏳ Day 6 – Final Reporting & Documentation
+
+---
+
+## Achievements
 
 * Data ingestion pipeline implemented
-* Data validation completed
+* AMFI validation completed
 * Live NAV integration completed
 * Data cleaning pipeline created
 * SQLite database designed and populated
 * Analytical SQL queries implemented
-* Data dictionary documented
+* Exploratory Data Analysis completed
+* Business insights generated
+* Visualization framework established
+* Analytics-ready datasets prepared
 
 ---
 
 ## Next Steps
 
+* Return and risk analysis
+* CAGR and rolling returns
+* Volatility and drawdown analysis
+* Sharpe Ratio comparison
+* Benchmark comparison metrics
 * Dashboard development
-* Advanced analytics
-* Data visualization
-* KPI tracking
-* Investor insights reporting
-* Mutual fund performance monitoring
+* KPI monitoring and reporting
