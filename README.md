@@ -1,21 +1,28 @@
 # Mutual Fund Analytics – Capstone Project
 
+An end-to-end Data Engineering and Analytics project focused on mutual fund performance, risk analytics, investor behavior, portfolio concentration, and recommendation systems.
+
+![Python](https://img.shields.io/badge/Python-3.x-blue)
+![SQLite](https://img.shields.io/badge/Database-SQLite-green)
+![Power BI](https://img.shields.io/badge/Visualization-Power%20BI-yellow)
+
+**GitHub Repository:** https://github.com/prs-24/MutualFundAnalytics
+
 ## Overview
 
-Mutual Fund Analytics is an end-to-end Data Engineering and Analytics project designed to analyze mutual fund performance, investor behavior, portfolio concentration, and risk metrics. The project covers the complete analytics pipeline, including data ingestion, validation, cleaning, exploratory data analysis, financial analytics, dashboard creation, and a rule-based recommendation engine.
+Mutual Fund Analytics is an end-to-end Data Engineering and Analytics project focused on analyzing mutual fund performance, investor behavior, portfolio concentration, and risk metrics. The project covers the complete analytics lifecycle, including data ingestion, validation, cleaning, exploratory data analysis, financial analytics, database design, dashboard creation, and a rule-based recommendation engine.
 
 ---
 
 ## Objectives
 
-* Analyze mutual fund performance and risk.
-* Evaluate risk-adjusted returns.
-* Study investor behavior and investment patterns.
+* Analyze mutual fund performance and risk characteristics.
+* Evaluate risk-adjusted returns using financial metrics.
+* Study investor behavior and SIP continuity patterns.
 * Measure downside risk using VaR and CVaR.
-* Analyze SIP continuity and investor retention.
-* Understand portfolio concentration using HHI.
+* Analyze portfolio concentration using HHI.
 * Build a mutual fund recommendation engine.
-* Create interactive dashboards for business insights.
+* Develop interactive Power BI dashboards for business insights.
 
 ---
 
@@ -37,9 +44,9 @@ Mutual Fund Analytics is an end-to-end Data Engineering and Analytics project de
 ### Development Tools
 
 * Jupyter Notebook
+* VS Code
 * Git
 * GitHub
-* VS Code
 
 ---
 
@@ -55,9 +62,11 @@ MutualFundAnalytics
 │   └── processed
 │
 ├── database
-│   ├── bluestock_mf.db
-│   ├── queries.sql
-│   └── schema.sql
+│   └── bluestock_mf.db
+│
+├── sql
+│   ├── schema.sql
+│   └── queries.sql
 │
 ├── docs
 │   └── data_dictionary.md
@@ -67,31 +76,29 @@ MutualFundAnalytics
 │   ├── performance_analytics.ipynb
 │   └── Advance_Analytics.ipynb
 │
-├── powerbi
-│
 ├── reports
 │   ├── charts
 │   ├── alpha_beta.csv
 │   ├── cagr_results.csv
 │   ├── cohort_summary.csv
 │   ├── cohort_top_funds.csv
-│   ├── data_quality_summary.txt
 │   ├── fund_scorecard.csv
 │   ├── hhi_concentration_report.csv
 │   ├── sip_continuity_report.csv
 │   ├── var_cvar_report.csv
+│   ├── data_quality_summary.txt
 │   ├── Final_Report.pdf
-│   └── Bluestock_MF_Presentation.pptx
+│   └── Mutual_Fund_Analytics_Presentation.pptx
 │
 ├── scripts
 │   ├── amfi_validation.py
 │   ├── create_db.py
 │   ├── data_ingestion.py
 │   ├── day2_cleaning.py
+│   ├── etl_pipeline.py
 │   ├── live_nav_fetch.py
 │   ├── load_data.py
 │   ├── recommender.py
-│   ├── run_pipeline.py
 │   └── verify_db.py
 │
 ├── requirements.txt
@@ -114,7 +121,7 @@ Data Cleaning
     ↓
 Exploratory Data Analysis
     ↓
-Financial Analytics
+Performance Analytics
     ↓
 SQLite Database
     ↓
@@ -150,11 +157,11 @@ Recommendation Engine
 ## Portfolio Analytics
 
 * Herfindahl-Hirschman Index (HHI)
-* Portfolio Concentration
+* Portfolio Concentration Analysis
 
 ## Recommendation System
 
-* Risk-based mutual fund recommendations
+* Risk-based fund recommendations
 * Sharpe ratio-based ranking
 
 ---
@@ -171,7 +178,7 @@ Recommendation Engine
 * fact_transactions
 * fact_performance
 
-SQLite was used as the analytical database for storing cleaned and transformed datasets.
+SQLite is used as the analytical database for storing cleaned and transformed datasets.
 
 ---
 
@@ -179,41 +186,31 @@ SQLite was used as the analytical database for storing cleaned and transformed d
 
 Five dashboard pages were created:
 
-### 1. Executive Overview Dashboard
-
-Contains:
+### Executive Overview Dashboard
 
 * KPI cards
 * Average ratings
 * Expense ratio metrics
 * Summary statistics
 
-### 2. Fund Performance Dashboard
-
-Contains:
+### Fund Performance Dashboard
 
 * Top-performing funds
 * Category comparison
 * Fund house analysis
 
-### 3. Investor Behaviour Dashboard
-
-Contains:
+### Investor Behaviour Dashboard
 
 * Transaction patterns
 * SIP analysis
 * Investor insights
 
-### 4. Portfolio Dashboard
+### Portfolio Dashboard
 
-Contains:
-
-* Portfolio concentration analysis
 * Diversification metrics
+* Portfolio concentration analysis
 
-### 5. Recommendation Dashboard
-
-Contains:
+### Recommendation Dashboard
 
 * Risk-based filtering
 * Fund recommendations
@@ -230,7 +227,6 @@ Contains:
 * hhi_concentration_report.csv
 * sip_continuity_report.csv
 * var_cvar_report.csv
-* data_quality_summary.txt
 
 ---
 
@@ -238,7 +234,7 @@ Contains:
 
 | Script             | Purpose                           |
 | ------------------ | --------------------------------- |
-| data_ingestion.py  | Dataset inspection                |
+| data_ingestion.py  | Dataset ingestion                 |
 | amfi_validation.py | AMFI code validation              |
 | day2_cleaning.py   | Data cleaning                     |
 | create_db.py       | Database creation                 |
@@ -246,7 +242,7 @@ Contains:
 | verify_db.py       | Database verification             |
 | live_nav_fetch.py  | Live NAV retrieval                |
 | recommender.py     | Mutual fund recommendation engine |
-| run_pipeline.py    | Master pipeline execution         |
+| etl_pipeline.py    | Master ETL pipeline               |
 
 ---
 
@@ -255,7 +251,7 @@ Contains:
 Clone the repository:
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/prs-24/MutualFundAnalytics.git
 cd MutualFundAnalytics
 ```
 
@@ -265,19 +261,19 @@ Install dependencies:
 pip install -r requirements.txt
 ```
 
-Execute the pipeline:
+Execute the ETL pipeline:
 
 ```bash
-python scripts/run_pipeline.py
+python scripts/etl_pipeline.py
 ```
 
 ---
 
 # Key Insights
 
-* Equity funds dominate the market.
-* Expense ratio significantly impacts returns.
-* High-rated funds demonstrate better consistency.
+* Equity funds dominate the mutual fund market.
+* Expense ratio has a significant impact on returns.
+* Highly rated funds demonstrate better consistency.
 * SIP continuity varies across investors.
 * Portfolio concentration differs among schemes.
 * Risk-adjusted metrics provide deeper insights than absolute returns.
@@ -296,19 +292,21 @@ python scripts/run_pipeline.py
 
 # Project Status
 
-✅ Day 1 – Project Setup
+✅ Project Setup and Data Collection
 
-✅ Day 2 – Data Validation and Cleaning
+✅ Data Validation and Cleaning
 
-✅ Day 3 – Exploratory Data Analysis
+✅ Exploratory Data Analysis
 
-✅ Day 4 – Performance Analytics
+✅ Performance Analytics
 
-✅ Day 5 – Dashboard Preparation
+✅ Dashboard Development
 
-✅ Day 6 – Advanced Analytics
+✅ Advanced Analytics
 
-✅ Day 7 – Power BI Dashboard and Project Finalization
+✅ Recommendation Engine
+
+✅ Project Finalization
 
 ---
 
