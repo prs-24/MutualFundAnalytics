@@ -1,91 +1,171 @@
-import pandas as pd
+"""
+Data Cleaning Module
+
+This module performs data cleaning and preprocessing on
+selected datasets and saves the cleaned datasets to the
+data/processed directory.
+
+Datasets Processed:
+- NAV History
+- Investor Transactions
+- Scheme Performance
+"""
+
 import os
 
-RAW = "data/raw"
-PROCESSED = "data/processed"
+import pandas as pd
 
-os.makedirs(PROCESSED, exist_ok=True)
+RAW_FOLDER = "data/raw"
+PROCESSED_FOLDER = "data/processed"
 
-# -----------------------
-# NAV HISTORY
-# -----------------------
+os.makedirs(PROCESSED_FOLDER, exist_ok=True)
 
-nav = pd.read_csv(f"{RAW}/02_nav_history.csv")
 
-nav["date"] = pd.to_datetime(nav["date"])
+def clean_nav_history():
+    """
+    Clean the NAV history dataset.
 
-nav = nav.sort_values(
-    ["amfi_code", "date"]
-)
+    Operations performed:
+    - Convert date column to datetime
+    - Sort records
+    - Remove duplicates
+    - Remove invalid NAV values
 
-nav = nav.drop_duplicates()
+    Returns
+    -------
+    None
+    """
 
-nav = nav[nav["nav"] > 0]
+    nav_data = pd.read_csv(
+        f"{RAW_FOLDER}/02_nav_history.csv"
+    )
 
-nav.to_csv(
-    f"{PROCESSED}/02_nav_history_clean.csv",
-    index=False
-)
+    nav_data["date"] = pd.to_datetime(
+        nav_data["date"]
+    )
 
-print("NAV cleaned")
+    nav_data = nav_data.sort_values(
+        by=["amfi_code", "date"]
+    )
 
-# -----------------------
-# INVESTOR TRANSACTIONS
-# -----------------------
+    nav_data = nav_data.drop_duplicates()
 
-txn = pd.read_csv(
-    f"{RAW}/08_investor_transactions.csv"
-)
+    nav_data = nav_data[
+        nav_data["nav"] > 0
+    ]
 
-txn["transaction_date"] = pd.to_datetime(
-    txn["transaction_date"]
-)
+    nav_data.to_csv(
+        f"{PROCESSED_FOLDER}/02_nav_history_clean.csv",
+        index=False
+    )
 
-txn["transaction_type"] = (
-    txn["transaction_type"]
-    .str.strip()
-    .str.title()
-)
+    print("NAV history dataset cleaned successfully.")
 
-valid_types = [
-    "Sip",
-    "Lumpsum",
-    "Redemption"
-]
 
-txn = txn[
-    txn["transaction_type"]
-    .isin(valid_types)
-]
+def clean_investor_transactions():
+    """
+    Clean the investor transactions dataset.
 
-txn = txn[
-    txn["amount_inr"] > 0
-]
+    Operations performed:
+    - Convert transaction date to datetime
+    - Standardize transaction types
+    - Filter valid transaction categories
+    - Remove records with invalid amounts
 
-txn.to_csv(
-    f"{PROCESSED}/08_investor_transactions_clean.csv",
-    index=False
-)
+    Returns
+    -------
+    None
+    """
 
-print("Transactions cleaned")
+    transaction_data = pd.read_csv(
+        f"{RAW_FOLDER}/08_investor_transactions.csv"
+    )
 
-# -----------------------
-# SCHEME PERFORMANCE
-# -----------------------
+    transaction_data["transaction_date"] = pd.to_datetime(
+        transaction_data["transaction_date"]
+    )
 
-perf = pd.read_csv(
-    f"{RAW}/07_scheme_performance.csv"
-)
+    transaction_data["transaction_type"] = (
+        transaction_data["transaction_type"]
+        .str.strip()
+        .str.title()
+    )
 
-perf = perf[
-    (perf["expense_ratio_pct"] >= 0.1)
-    &
-    (perf["expense_ratio_pct"] <= 2.5)
-]
+    valid_transaction_types = [
+        "Sip",
+        "Lumpsum",
+        "Redemption"
+    ]
 
-perf.to_csv(
-    f"{PROCESSED}/07_scheme_performance_clean.csv",
-    index=False
-)
+    transaction_data = transaction_data[
+        transaction_data["transaction_type"]
+        .isin(valid_transaction_types)
+    ]
 
-print("Performance cleaned")
+    transaction_data = transaction_data[
+        transaction_data["amount_inr"] > 0
+    ]
+
+    transaction_data.to_csv(
+        f"{PROCESSED_FOLDER}/08_investor_transactions_clean.csv",
+        index=False
+    )
+
+    print("Investor transactions dataset cleaned successfully.")
+
+
+def clean_scheme_performance():
+    """
+    Clean the scheme performance dataset.
+
+    Operations performed:
+    - Remove unrealistic expense ratio values
+
+    Returns
+    -------
+    None
+    """
+
+    performance_data = pd.read_csv(
+        f"{RAW_FOLDER}/07_scheme_performance.csv"
+    )
+
+    performance_data = performance_data[
+        (
+            performance_data["expense_ratio_pct"] >= 0.1
+        )
+        &
+        (
+            performance_data["expense_ratio_pct"] <= 2.5
+        )
+    ]
+
+    performance_data.to_csv(
+        f"{PROCESSED_FOLDER}/07_scheme_performance_clean.csv",
+        index=False
+    )
+
+    print("Scheme performance dataset cleaned successfully.")
+
+
+def main():
+    """
+    Execute all data cleaning operations.
+    """
+
+    try:
+        clean_nav_history()
+        clean_investor_transactions()
+        clean_scheme_performance()
+
+        print("\nData cleaning completed successfully.")
+
+    except FileNotFoundError:
+        print("Error: One or more input files were not found.")
+
+    except Exception as error:
+        print(f"An unexpected error occurred: {error}")
+
+
+if __name__ == "__main__":
+    main()
